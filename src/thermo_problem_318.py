@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 NUp = np.linspace(100, 0, 101)
 Uen = np.linspace(-100, 100, 101)
 Mag = np.linspace(1, -1, 101)
-Omega = [math.factorial(100) / (math.factorial(x) * math.factorial(100 - x)) for x in NUp]
+Omega = [math.factorial(int(100)) / (math.factorial(int(x)) * math.factorial(int(100 - x))) for x in NUp]
 Sentro = [math.log(x) for x in Omega]
 
 # print(Uen)
@@ -20,7 +20,11 @@ while i < len(Omega):
     elif 0 < i < len(Omega) - 1:
         Udiff = Uen[i + 1] - Uen[i - 1]
         Sdiff = Sentro[i + 1] - Sentro[i - 1]
-        temperature.append(Udiff / Sdiff)
+
+        if Sdiff != 0:
+            temperature.append(Udiff / Sdiff)
+        else:
+            temperature.append('NAN')
     elif i == len(Omega) - 1:
         temperature.append(0)
     i += 1
